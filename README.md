@@ -1,6 +1,7 @@
 # Twitter Card Proxy
 
-[![Build Status](https://travis-ci.org/bep/twittercard-proxy.svg)](https://travis-ci.org/bep/twittercard-proxy)
+[![*Nix Build Status](https://travis-ci.org/bep/twittercard-proxy.svg)](https://travis-ci.org/bep/twittercard-proxy)
+[![Windows Build status](https://ci.appveyor.com/api/projects/status/v9bbybn1n6y2k5xc?svg=true)](https://ci.appveyor.com/project/bep/twittercard-proxy)
 [![GoDoc](https://godoc.org/github.com/bep/twittercard-proxy?status.svg)](https://godoc.org/github.com/bep/twittercard-proxy)
 [![Go Report Card](https://goreportcard.com/badge/github.com/bep/twittercard-proxy)](https://goreportcard.com/report/github.com/bep/twittercard-proxy)
 [![Coverage](http://gocover.io/_badge/github.com/bep/twittercard-proxy)](http://gocover.io/github.com/bep/twittercard-proxy)
