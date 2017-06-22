@@ -1,5 +1,10 @@
 # Twitter Card Proxy
 
+
+![Hugo 0.24 Tweet](https://s9.postimg.org/hvepyc1vz/hugo-024-tweet.png "Hugo 0.24 Tweet")
+
+The above screenshot is the single motivation behind this tool: To get [nicer looking](https://twitter.com/GoHugoIO/status/877500564405444608) Twitter cards when announcing GitHub-releases. GitHub provides some Twitter metadata, but it is for your account only, and just linking to the release page gets you a [rather blend](https://twitter.com/GoHugoIO/status/875629224228306944) Twitter card.
+
 ## Install
 
 **twittercard-proxy** is a Go application. The currently easiest way to intall it is via `go get`:
@@ -11,11 +16,18 @@
 ## Use
 
 ```bash
-Usage of twittercard-proxy:
+▶ ./twittercard-proxy -h
+Usage of ./twittercard-proxy:
   -f string
-    	The JSON filename with twitter cards. (default "twittercards.json")
+    	The JSON filename with twitter cards (default "./twittercards.json")
   -http string
-    	The HTTP listen address. (default "0.0.0.0:1414")
+    	The HTTP listen address (default "0.0.0.0:1414"
+```
+
+To add or modify Twitter cards, just edit the `JSON` file and send a `SIGHUP` signal to the server process:
+
+```bash
+kill -s SIGHUP <process-id>
 ```
 
 ## File format
