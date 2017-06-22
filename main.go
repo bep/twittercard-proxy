@@ -55,7 +55,8 @@ func main() {
 			}
 		default:
 			p.log.Printf("Captured %v. Exiting...", s)
-			shutdownCtx, _ := context.WithTimeout(context.Background(), 30*time.Second)
+			shutdownCtx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+			defer cancel()
 			server.Shutdown(shutdownCtx)
 
 			<-shutdownCtx.Done()
