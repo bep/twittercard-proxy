@@ -106,7 +106,7 @@ func cleanPath(p string) string {
 func readTwitterCards(filename string) ([]twitterCard, error) {
 	var tweets []twitterCard
 
-	log.Println("Read twitter cards from", filename)
+	log.Printf("Read twitter cards from %q", filename)
 
 	f, err := ioutil.ReadFile(filename)
 	if err != nil {

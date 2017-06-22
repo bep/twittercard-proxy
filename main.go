@@ -49,7 +49,6 @@ func main() {
 		s := <-signalChan
 		switch s {
 		case syscall.SIGHUP:
-			p.log.Printf("Captured SIGHUP, reloading twitter cards from %q...", p.cardsFile)
 			if err := p.load(); err != nil {
 				p.log.Println("ERROR: Failed to reload twitter cards:", err)
 			}
