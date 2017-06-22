@@ -1,7 +1,6 @@
 build:
   main: main.go
   binary: twittercard-proxy
-  ldflags: -s -w -linkmode external -extldflags "-static"
   goos:
     - darwin
     - linux
