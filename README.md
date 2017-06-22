@@ -1,5 +1,10 @@
 # Twitter Card Proxy
 
+[![Build Status](https://travis-ci.org/bep/twittercard-proxy.svg)](https://travis-ci.org/bep/twittercard-proxy)
+[![GoDoc](https://godoc.org/github.com/bep/twittercard-proxy?status.svg)](https://godoc.org/github.com/bep/twittercard-proxy)
+[![Go Report Card](https://goreportcard.com/badge/github.com/bep/twittercard-proxy)](https://goreportcard.com/report/github.com/bep/twittercard-proxy)
+[![Coverage](http://gocover.io/_badge/github.com/bep/twittercard-proxy)](http://gocover.io/github.com/bep/twittercard-proxy)
+
 
 ![Hugo 0.24 Tweet](https://s9.postimg.org/hvepyc1vz/hugo-024-tweet.png "Hugo 0.24 Tweet")
 
