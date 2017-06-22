@@ -3,7 +3,7 @@
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file.
 
-package main
+package proxy
 
 import (
 	"net/http"
@@ -16,38 +16,38 @@ import (
 func TestNewTcProxy(t *testing.T) {
 	assert := require.New(t)
 
-	p := newTcProxy("mytweets.json")
+	p := NewTcProxy("mytweets.json")
 
 	assert.NotNil(p)
 	assert.NotNil(p.templ)
-	assert.NotNil(p.log)
+	assert.NotNil(p.Log)
 	assert.Equal("mytweets.json", p.cardsFile)
 }
 
 func TestTcProxyLoad(t *testing.T) {
 	assert := require.New(t)
 
-	p := newTcProxy("testdata/test.json")
+	p := NewTcProxy("testdata/test.json")
 	assert.NotNil(p)
-	assert.NoError(p.load())
+	assert.NoError(p.Load())
 	assert.Len(p.routes.Load().(routes), 2)
 	tweet, found := p.getTweet("/c1")
 	assert.True(found)
 	assert.Equal("Twitter Card #1", tweet.Title)
 
 	// Error cases
-	p = newTcProxy("testdata/notfound.json")
-	assert.Error(p.load())
+	p = NewTcProxy("testdata/notfound.json")
+	assert.Error(p.Load())
 
-	p = newTcProxy("testdata/invalid.json")
-	assert.Error(p.load())
+	p = NewTcProxy("testdata/invalid.json")
+	assert.Error(p.Load())
 }
 
 func TestTcProxyServeHTTP(t *testing.T) {
 	assert := require.New(t)
 
-	p := newTcProxy("testdata/test.json")
-	assert.NoError(p.load())
+	p := NewTcProxy("testdata/test.json")
+	assert.NoError(p.Load())
 
 	req, err := http.NewRequest("GET", "/c1", nil)
 	assert.NoError(err)

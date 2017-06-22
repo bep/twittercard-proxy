@@ -13,7 +13,11 @@ import (
 	"os/signal"
 	"syscall"
 	"time"
+
+	"github.com/bep/twittercard-proxy/proxy"
 )
+
+var version = "master"
 
 func main() {
 	var (
@@ -26,9 +30,9 @@ func main() {
 
 	flag.Parse()
 
-	p := newTcProxy(cardsFile)
-	if err := p.load(); err != nil {
-		p.log.Fatal(err)
+	p := proxy.NewTcProxy(cardsFile)
+	if err := p.Load(); err != nil {
+		p.Log.Fatal(err)
 	}
 
 	server := http.Server{
@@ -37,10 +41,11 @@ func main() {
 	}
 
 	go func() {
-		p.log.Fatal(server.ListenAndServe())
+		p.Log.Fatal(server.ListenAndServe())
 	}()
 
-	p.log.Printf("HTTP listener on %s...", httpAddr)
+	p.Log.Printf("twittercard-proxy %s", version)
+	p.Log.Printf("HTTP listener on %s...", httpAddr)
 
 	signalChan := make(chan os.Signal, 1)
 	signal.Notify(signalChan, syscall.SIGINT, syscall.SIGTERM, syscall.SIGHUP)
@@ -49,17 +54,17 @@ func main() {
 		s := <-signalChan
 		switch s {
 		case syscall.SIGHUP:
-			if err := p.load(); err != nil {
-				p.log.Println("ERROR: Failed to reload twitter cards:", err)
+			if err := p.Load(); err != nil {
+				p.Log.Println("ERROR: Failed to reload twitter cards:", err)
 			}
 		default:
-			p.log.Printf("Captured %v. Exiting...", s)
+			p.Log.Printf("Captured %v. Exiting...", s)
 			shutdownCtx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 			defer cancel()
 			server.Shutdown(shutdownCtx)
 
 			<-shutdownCtx.Done()
-			p.log.Println(shutdownCtx.Err())
+			p.Log.Println(shutdownCtx.Err())
 			os.Exit(0)
 		}
 	}

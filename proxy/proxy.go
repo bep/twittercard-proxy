@@ -3,7 +3,7 @@
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file.
 
-package main
+package proxy
 
 import (
 	"encoding/json"
@@ -17,28 +17,30 @@ import (
 	"sync/atomic"
 )
 
-type tcProxy struct {
+// TcProxy is the proxy http server.
+type TcProxy struct {
 	routes    atomic.Value
-	log       *log.Logger
+	Log       *log.Logger
 	templ     *template.Template
 	cardsFile string
 }
 
-func newTcProxy(cardsFile string) *tcProxy {
+// NewTcProxy creates a new twitter card proxy.
+func NewTcProxy(cardsFile string) *TcProxy {
 	templ := template.Must(template.New("").Parse(pageTemplate))
-	return &tcProxy{
+	return &TcProxy{
 		templ:     templ,
 		cardsFile: cardsFile,
-		log:       log.New(os.Stderr, "", log.LstdFlags)}
+		Log:       log.New(os.Stderr, "", log.LstdFlags)}
 }
 
-func (p *tcProxy) getTweet(path string) (twitterCard, bool) {
+func (p *TcProxy) getTweet(path string) (twitterCard, bool) {
 	r := p.routes.Load().(routes)
 	t, found := r[path]
 	return t, found
 }
 
-func (p *tcProxy) load() error {
+func (p *TcProxy) Load() error {
 	tweets, err := readTwitterCards(p.cardsFile)
 	if err != nil {
 		return err
@@ -54,7 +56,7 @@ func (p *tcProxy) load() error {
 	return nil
 }
 
-func (p *tcProxy) ServeHTTP(w http.ResponseWriter, req *http.Request) {
+func (p *TcProxy) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	if req.Method != http.MethodGet {
 		http.Error(w, "Not allowed", http.StatusMethodNotAllowed)
 		return
@@ -78,7 +80,7 @@ func (p *tcProxy) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	}
 
 	if err := p.templ.Execute(w, tweet); err != nil {
-		p.log.Println(err)
+		p.Log.Println(err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 }
