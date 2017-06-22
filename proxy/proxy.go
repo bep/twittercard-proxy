@@ -40,6 +40,8 @@ func (p *TcProxy) getTweet(path string) (twitterCard, bool) {
 	return t, found
 }
 
+// Load loads or reloads the Twitter cards from the provided JSON file.
+// This method is thread safe.
 func (p *TcProxy) Load() error {
 	tweets, err := readTwitterCards(p.cardsFile)
 	if err != nil {
