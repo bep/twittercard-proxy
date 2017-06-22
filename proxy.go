@@ -135,7 +135,7 @@ const pageTemplate = `
 <html>
     <head>
 		<link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
-        <meta charset="utf-8"/>
+		<meta charset="utf-8"/>
 		<meta name="twitter:card" content="summary_large_image">
 		<meta name="twitter:site" content="{{ .Site }}">
 		<meta name="twitter:creator" content="{{ .Creator }}">
