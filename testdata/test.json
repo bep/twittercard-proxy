@@ -1,0 +1,20 @@
+[
+	{
+		"id": "c1",
+		"site": "@GoHugoIO",
+		"creator": "@bepsays",
+		"image": "https://s11.postimg.org/jsd2aq1er/hugo-24-poster.png",
+		"title": "Twitter Card #1",
+		"description": "Some text",
+		"target": "https://github.com/gohugoio/hugo/releases/tag/v0.24"
+	},
+	{
+		"id": "c2",
+		"site": "@GoHugoIO",
+		"creator": "@bepsays",
+		"image": "https://s11.postimg.org/jsd2aq1er/hugo-24-poster.png",
+		"title": "Twitter Card #2",
+		"description": "Some text",
+		"target": "https://github.com/gohugoio/hugo/releases/tag/v0.24"
+	}
+]

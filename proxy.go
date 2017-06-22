@@ -24,7 +24,8 @@ type tcProxy struct {
 	cardsFile string
 }
 
-func newTcProxy(templ *template.Template, cardsFile string) *tcProxy {
+func newTcProxy(cardsFile string) *tcProxy {
+	templ := template.Must(template.New("").Parse(pageTemplate))
 	return &tcProxy{
 		templ:     templ,
 		cardsFile: cardsFile,

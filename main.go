@@ -8,7 +8,6 @@ package main
 import (
 	"context"
 	"flag"
-	"html/template"
 	"net/http"
 	"os"
 	"os/signal"
@@ -22,12 +21,12 @@ func main() {
 		cardsFile string
 	)
 
-	flag.StringVar(&httpAddr, "http", "0.0.0.0:1414", "The HTTP listen address.")
-	flag.StringVar(&cardsFile, "f", "twittercards.json", "The JSON filename with twitter cards.")
+	flag.StringVar(&httpAddr, "http", "0.0.0.0:1414", "The HTTP listen address")
+	flag.StringVar(&cardsFile, "f", "./twittercards.json", "The JSON filename with twitter cards")
 
 	flag.Parse()
 
-	p := newTcProxy(template.Must(template.New("").Parse(pageTemplate)), cardsFile)
+	p := newTcProxy(cardsFile)
 	if err := p.load(); err != nil {
 		p.log.Fatal(err)
 	}
