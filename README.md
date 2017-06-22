@@ -14,7 +14,9 @@ The above screenshot is the single motivation behind this tool: To get [nicer lo
 
 ## Install
 
-**twittercard-proxy** is a Go application. The currently easiest way to intall it is via `go get`:
+Download a binary from [releases](https://github.com/bep/twittercard-proxy/releases).
+
+**twittercard-proxy** is a Go application, so you can also easiliy compile it yourself or intall it is via `go get`:
 
 ```bash
  go get -v github.com/bep/twittercard-proxy
